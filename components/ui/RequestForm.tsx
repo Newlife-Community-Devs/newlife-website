@@ -3,6 +3,10 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
+import { API_BASE_URL } from "@/constants";
+import { SuccessModal } from "@/components/common/SuccessModal";
+import { FailedModal } from "@/components/common/FailedModal";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 interface RequestFormProps {
   onClose: () => void;
@@ -28,6 +32,10 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
   const [step, setStep] = useState(1);
   const [prayerRequest, setPrayerRequest] = useState("");
   const [keepAnonymous, setKeepAnonymous] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showFailedModal, setShowFailedModal] = useState(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handlePrayerRequestSubmit = (values: { prayerRequest: string }) => {
     setPrayerRequest(values.prayerRequest);
@@ -42,7 +50,7 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
         name: "",
         phoneNumber: "",
         prayerRequest,
-        keepAnonymous,
+        keepAnonymous: isAnonymous,
       });
     } else {
       setStep(3);
@@ -50,27 +58,97 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
   };
 
   const handleSubmit = async (values: FormValues) => {
+    setIsLoading(true);
     try {
-      const response = await fetch("", {
+      const url = `https://newlife-prayer-wall-backend-1gq0w2ror.vercel.app/prayers/submit`;
+      console.log("Submitting to:", url); // DEBUG: Check this logs the correct URL
+
+      const response = await fetch(url, {
         method: "POST",
         headers: {
+          accept: "application/json",
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
       });
-      const data = await response.json();
-      onClose();
-      if (data) {
-      }else{
 
+      if (!response.ok) {
+        // Try to get error message from response
+        let errorMsg = `Failed to submit prayer request. Status: ${response.status}`;
+        try {
+          const errorData = await response.json();
+          if (errorData.message) {
+            errorMsg = errorData.message;
+          } else if (errorData.error) {
+            errorMsg = errorData.error;
+          }
+        } catch {
+          // If response is not JSON, use default message
+        }
+
+        setErrorMessage(errorMsg);
+        setShowFailedModal(true);
+        return;
+      }
+
+      const data = await response.json();
+
+      // Success - show success modal
+      setShowSuccessModal(true);
+
+      // Optionally log success
+      if (data) {
+        console.log("Prayer request submitted successfully:", data);
       }
     } catch (error) {
       console.error("Error submitting prayer request:", error);
+
+      // Set error message based on error type
+      const errorMsg =
+        error instanceof Error
+          ? error.message
+          : "Network error. Please check your connection and try again.";
+      setErrorMessage(errorMsg);
+      setShowFailedModal(true);
     }
+    setIsLoading(false);
   };
 
+  const handleRetry = () => {
+    setShowFailedModal(false);
+    setErrorMessage("");
+    // Form will remain open for user to retry
+  };
+
+  // Show success modal if request was successful
+  if (showSuccessModal) {
+    return (
+      <SuccessModal
+        onClose={() => {
+          setShowSuccessModal(false);
+          onClose();
+        }}
+      />
+    );
+  }
+
+  // Show failed modal if request failed
+  if (showFailedModal) {
+    return (
+      <FailedModal
+        onClose={() => {
+          setShowFailedModal(false);
+          setErrorMessage("");
+          onClose();
+        }}
+        onRetry={handleRetry}
+        errorMessage={errorMessage}
+      />
+    );
+  }
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-6 ">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 md:p-6 overflow-y-auto">
       {/* Backdrop with blur */}
       <div
         className="absolute inset-0 bg-black/40 backdrop-blur-md"
@@ -78,9 +156,9 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
       />
 
       {/* Form content */}
-      <div className="relative z-10 flex w-full max-w-5xl shadow-2xl">
-        {/* Left Section - Yellow Background */}
-        <div className="relative flex w-1/2 flex-col items-center justify-center bg-yellow-400 p-6">
+      <div className="relative z-10 flex w-full max-w-5xl shadow-2xl rounded-lg overflow-hidden my-auto">
+        {/* Left Section - Yellow Background - Hidden on mobile */}
+        <div className="hidden md:flex relative w-1/2 flex-col items-center justify-center bg-yellow-400 p-6">
           {/* Decorative quotation marks */}
           <div className="absolute left-8 top-16 text-9xl font-serif text-black opacity-40">
             {`"`}
@@ -112,23 +190,24 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
         </div>
 
         {/* Right Section - White Background */}
-        <div className="flex w-1/2 flex-col bg-white p-8">
+        <div className="flex w-full md:w-1/2 flex-col bg-white p-4 sm:p-6 md:p-8">
           {/* Logo at top */}
-          <div className="mb-8 flex items-center justify-center gap-2">
+          <div className="mb-4 sm:mb-6 md:mb-8 flex items-center justify-center gap-2">
             <Image
               src="/images/nav-logo.png"
               alt="Newlife Community Baptist Church logo"
-              width={100}
-              height={100}
+              width={80}
+              height={80}
+              className="sm:w-24 sm:h-24 md:w-[100px] md:h-[100px]"
             />
           </div>
 
           {/* Main content */}
           <div className="mx-auto w-full max-w-lg">
-            <h1 className="mb-3 text-3xl font-bold text-black">
+            <h1 className="mb-2 sm:mb-3 text-2xl sm:text-3xl font-bold text-black">
               Prayer Request
             </h1>
-            <p className="mb-6 text-sm leading-relaxed text-gray-500">
+            <p className="mb-4 sm:mb-6 text-xs sm:text-sm leading-relaxed text-gray-500">
               You&apos;re not alone in this. When we bring our needs before God,
               He meets us with love and power. Share your request and let&apos;s
               believe for His perfect answer.
@@ -169,7 +248,7 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
                       </div>
                       <button
                         type="submit"
-                        className="mt-4 flex items-center gap-2 rounded-md bg-yellow-400 px-5 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition duration-400 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="mt-4 w-full sm:w-auto flex items-center justify-center gap-2 rounded-md bg-yellow-400 px-5 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition duration-400 disabled:opacity-50 disabled:cursor-not-allowed"
                         disabled={!isValid}
                       >
                         Next
@@ -184,22 +263,28 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
             {/* Step 2: Anonymous Choice */}
             {step === 2 && (
               <div>
-                <p className="mb-4 text-black font-medium">
+                <p className="mb-4 text-black font-medium text-sm sm:text-base">
                   Would you like to be kept anonymous?
                 </p>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                   <button
-                    className="mt-4 flex items-center gap-2 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition duration-400"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-md bg-gray-100 px-5 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition duration-400"
                     onClick={() => handleAnonymousChoice(false)}
+                    disabled={isLoading}
                   >
                     No
                   </button>
                   <button
-                    className="mt-4 flex items-center gap-2 rounded-md bg-yellow-400 px-5 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition duration-400"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-md bg-yellow-400 px-5 py-2.5 text-sm font-semibold text-black hover:bg-black hover:text-white transition duration-400 disabled:opacity-50 disabled:cursor-not-allowed"
                     onClick={() => handleAnonymousChoice(true)}
+                    disabled={isLoading}
                   >
                     Yes
-                    <span className="">&rarr;</span>
+                    {isLoading ? (
+                      <LoadingSpinner />
+                    ) : (
+                      <span className="">&rarr;</span>
+                    )}
                   </button>
                 </div>
               </div>
@@ -270,31 +355,36 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex space-x-4 mt-8">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:space-x-4 sm:gap-0 mt-6 sm:mt-8">
                         <button
                           type="button"
                           onClick={onClose}
-                          className="flex-1 px-6 py-3 bg-gray-200 text-black rounded-lg font-medium hover:bg-gray-300 transition-colors"
+                          disabled={isLoading}
+                          className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-200 text-black rounded-lg font-medium hover:bg-gray-300 transition-colors text-sm sm:text-base disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           Cancel
                         </button>
                         <button
                           type="submit"
-                          disabled={!isValid}
-                          className="flex-1 px-6 py-3 bg-yellow-400 text-black rounded-lg font-medium hover:bg-yellow-300 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                          disabled={!isValid || isLoading}
+                          className="flex-1 px-4 sm:px-6 py-2.5 sm:py-3 bg-yellow-400 text-black rounded-lg font-medium hover:bg-yellow-300 transition-colors flex items-center justify-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
                         >
                           <span>Submit</span>
-                          <svg
-                            className="w-4 h-4"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                          >
-                            <path
-                              fillRule="evenodd"
-                              d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
+                          {isLoading ? (
+                            <LoadingSpinner />
+                          ) : (
+                            <svg
+                              className="w-4 h-4"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          )}
                         </button>
                       </div>
                     </Form>
