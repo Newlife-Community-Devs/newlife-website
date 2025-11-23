@@ -1,5 +1,6 @@
 import React from "react";
 
+const YOUTUBELINK = process.env.YOUTUBE_LIVE_LINK!;
 const SermonSection = () => {
   return (
     <section className="w-full bg-[#FCFCFC] py-20 px-4 lg:px-8">
@@ -15,7 +16,7 @@ const SermonSection = () => {
               <div className="aspect-video bg-gray-200 rounded-xl flex items-center justify-center">
                 <iframe
                   className="w-full h-full"
-                  src="https://www.youtube.com/embed/-scW17arQ50?si=QZQI9N2KouE-BVgY&amp;"
+                  src={YOUTUBELINK}
                   title="YouTube video player"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   referrerPolicy="strict-origin-when-cross-origin"
@@ -25,7 +26,6 @@ const SermonSection = () => {
             </div>
 
             {/* Sermon Details */}
-            
           </div>
         </div>
       </div>
