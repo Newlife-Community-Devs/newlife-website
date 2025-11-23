@@ -12,6 +12,12 @@ export interface EventData {
   badge: string;
 }
 
+export interface UserSession {
+  email: string;
+  token: string;
+  token_type: string;
+  expires: string;
+}
 export interface Prayer {
   id: string;
   user: {
