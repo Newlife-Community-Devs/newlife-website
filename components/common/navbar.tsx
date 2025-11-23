@@ -134,7 +134,7 @@ const Navbar = () => {
         </div>
       </nav>
       {isOpen && (
-        <div className='lg:hidden absolute top-[90px] inset-0 z-50 w-full h-1/2 bg-black shadow-md transition-all duration-300'>
+        <div className='lg:hidden absolute top-[90px] inset-0 z-50 w-full h-auto bg-black shadow-md transition-all duration-300'>
           <div className='flex flex-col w-full space-y-2'>
             <Link
               href='/'
