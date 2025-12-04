@@ -7,6 +7,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { signIn } from "next-auth/react";
 import { useState } from "react";
+import Link from "next/link";
+import { PAGE_URL } from "@/constants";
 
 interface LoginValues {
   username: string;
@@ -67,13 +69,15 @@ const Login = () => {
         <div className="bg-white shadow-2xl rounded-2xl flex w-2/3 max-w-4xl overflow-hidden">
           {/* Left: Login Section */}
           <div className="w-3/5 p-8 flex flex-col items-center justify-center">
-            <Image
-              src="/images/logo1.png"
-              alt="Church Logo"
-              width={200}
-              height={200}
-              className="mb-6"
-            />
+            <Link href={PAGE_URL.HOME}>
+              <Image
+                src="/images/logo1.png"
+                alt="Church Logo"
+                width={200}
+                height={200}
+                className="mb-6"
+              />
+            </Link>
 
             {/* Error Message */}
             {error && (
