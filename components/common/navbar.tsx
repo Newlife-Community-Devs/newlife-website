@@ -19,12 +19,14 @@ const Navbar = () => {
       <nav className="w-full sticky h-[90px] bg-white shadow-[0px_4px_4px_0px_rgba(107,114,128,0.08)] flex items-center justify-between px-8 lg:px-20">
         {/* Logo placeholder - you can add your church logo here */}
         <div className="flex-shrink-0">
-          <Image
-            src="/images/nav-logo.png"
-            alt="Newlife"
-            width={160}
-            height={90}
-          />
+          <Link href="/">
+            <Image
+              src="/images/nav-logo.png"
+              alt="Newlife"
+              width={160}
+              height={90}
+            />
+          </Link>
         </div>
 
         {/* Navigation Menu */}

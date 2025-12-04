@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
-import { API_BASE_URL } from "@/constants";
+import { API_BASE_URL, PAGE_URL } from "@/constants";
 import { SuccessModal } from "@/components/common/SuccessModal";
 import { FailedModal } from "@/components/common/FailedModal";
 import LoadingSpinner from "../common/LoadingSpinner";
+import Link from "next/link";
 
 interface RequestFormProps {
   onClose: () => void;
@@ -179,12 +180,14 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
               </span>
             </p>
             <div className="mt-6 flex items-center justify-center gap-2 border-t border-gray-200 pt-4">
-              <Image
-                src="/images/nav-logo.png"
-                alt="Newlife Community Baptist Church logo"
-                width={100}
-                height={100}
-              />
+              <Link href={PAGE_URL.HOME}>
+                <Image
+                  src="/images/nav-logo.png"
+                  alt="Newlife Community Baptist Church logo"
+                  width={100}
+                  height={100}
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -193,13 +196,15 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
         <div className="flex w-full md:w-1/2 flex-col bg-white p-4 sm:p-6 md:p-8">
           {/* Logo at top */}
           <div className="mb-4 sm:mb-6 md:mb-8 flex items-center justify-center gap-2">
-            <Image
-              src="/images/nav-logo.png"
-              alt="Newlife Community Baptist Church logo"
-              width={80}
-              height={80}
-              className="sm:w-24 sm:h-24 md:w-[100px] md:h-[100px]"
-            />
+            <Link href={PAGE_URL.HOME}>
+              <Image
+                src="/images/nav-logo.png"
+                alt="Newlife Community Baptist Church logo"
+                width={80}
+                height={80}
+                className="sm:w-24 sm:h-24 md:w-[100px] md:h-[100px]"
+              />
+            </Link>
           </div>
 
           {/* Main content */}

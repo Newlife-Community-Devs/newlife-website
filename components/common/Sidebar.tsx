@@ -11,6 +11,8 @@ import React, { ReactNode, useState } from "react";
 import NavItem from "./NavItem";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { PAGE_URL } from "@/constants";
 
 const menuItems: { icon: ReactNode; text: string; href: string }[] = [
   { icon: <LayoutDashboard />, text: "Dashboard", href: "dashboard" },
@@ -38,13 +40,15 @@ const Sidebar = () => {
         {isOpen ? <ChevronsLeft /> : <ChevronsRight />}
       </motion.span>
 
-      <Image
-        src={"/images/nav-logo.png"}
-        alt="Newlife"
-        width={150}
-        height={70}
-        className="hidden lg:block"
-      />
+      <Link href={PAGE_URL.HOME}>
+        <Image
+          src={"/images/nav-logo.png"}
+          alt="Newlife"
+          width={150}
+          height={70}
+          className="hidden lg:block"
+        />
+      </Link>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="mb-4 block md:hidden"

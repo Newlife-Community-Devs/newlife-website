@@ -2,6 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { PAGE_URL } from "@/constants";
 
 interface SuccessModalProps {
   onClose?: () => void;
@@ -91,13 +93,15 @@ export const SuccessModal = ({ onClose }: SuccessModalProps) => {
         {/* Logo at bottom right */}
         <div className="flex justify-end items-end mt-8">
           <div className="flex items-center gap-3">
-            <Image
-              src="/images/nav-logo.png"
-              alt="Newlife Community Baptist Church logo"
-              width={40}
-              height={40}
-              className="w-8 h-8 md:w-10 md:h-10"
-            />
+            <Link href={PAGE_URL.HOME}>
+              <Image
+                src="/images/nav-logo.png"
+                alt="Newlife Community Baptist Church logo"
+                width={40}
+                height={40}
+                className="w-8 h-8 md:w-10 md:h-10"
+              />
+            </Link>
             <div className="text-black text-xs md:text-sm leading-tight">
               <div className="font-semibold">Newlife</div>
               <div>Community</div>
