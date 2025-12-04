@@ -1,6 +1,8 @@
-"use client"
-import React from 'react'
-import Image from 'next/image'
+"use client";
+import React from "react";
+import Image from "next/image";
+import { PAGE_URL } from "@/constants";
+import Link from "next/link";
 
 const Affiliation = () => {
   return (
@@ -11,15 +13,17 @@ const Affiliation = () => {
             {/* Logo and Title */}
             <div className="flex flex-col items-center">
               <div className="w-32 h-32 rounded-full overflow-hidden shadow-lg">
-                <Image
-                  src="/images/ghana-baptist-logo.jpg"
-                  alt="Ghana Baptist Convention Logo"
-                  width={128}
-                  height={128}
-                  className="w-full h-full object-cover"
-                />
+                <Link href={PAGE_URL.HOME}>
+                  <Image
+                    src="/images/ghana-baptist-logo.jpg"
+                    alt="Ghana Baptist Convention Logo"
+                    width={128}
+                    height={128}
+                    className="w-full h-full object-cover"
+                  />
+                </Link>
               </div>
-              
+
               <div className="text-center">
                 <p className="text-xl font-semibold text-black mb-2">
                   Proudly Affiliated with
@@ -29,18 +33,20 @@ const Affiliation = () => {
                 </h3>
               </div>
             </div>
-            
+
             {/* Description */}
             <div className="flex-1">
               <p className="text-lg text-gray-600 leading-relaxed text-center">
-                As a member of the Ghana Baptist Convention, we are part of a larger family of churches committed to spreading the Gospel and serving communities across Ghana with excellence and integrity.
+                As a member of the Ghana Baptist Convention, we are part of a
+                larger family of churches committed to spreading the Gospel and
+                serving communities across Ghana with excellence and integrity.
               </p>
             </div>
           </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Affiliation
+export default Affiliation;

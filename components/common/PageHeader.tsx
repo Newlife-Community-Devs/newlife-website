@@ -4,6 +4,8 @@ import Image from "next/image";
 import DailyWordCard from "../DailyWordCard";
 import { useRouter } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
+import Link from "next/link";
+import { PAGE_URL } from "@/constants";
 
 interface PageHeaderProps {
   hasDailyWord?: boolean;
@@ -19,6 +21,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <div className="flex flex-col lg:flex-row lg:justify-between lg:items-start gap-6 lg:gap-4">
       <div className="flex justify-center lg:justify-start">
+        <Link href={PAGE_URL.HOME}>
         <Image
           src={imageUrl ? imageUrl : "/images/footer-logo.png"}
           alt="Newlife"
@@ -26,6 +29,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
           height={70}
           className=""
         />
+        </Link>
       </div>
       <div className="inline-flex items-center px-4 py-2 lg:px-5 lg:py-1 mt-1 lg:mt-4 bg-[#FFFCEB] rounded-full text-center lg:flex-1 lg:max-w-2xl">
         <span className="text-gray-800 text-sm lg:text-lg font-bold w-full">

@@ -5,6 +5,8 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import CustomModal from "../common/CustomModal";
 import Image from "next/image";
+import Link from "next/link";
+import { PAGE_URL } from "@/constants";
 
 interface PrayerRequestModalProps {
   show: boolean;
@@ -66,12 +68,14 @@ const PrayerRequestModal: React.FC<PrayerRequestModalProps> = ({
 
             {/* Church Logo */}
             <div className="flex items-center space-x-3">
-              <Image
-                src="/images/nav-logo.png"
-                alt="Newlife"
-                width={160}
-                height={90}
-              />
+              <Link href={PAGE_URL.HOME}>
+                <Image
+                  src="/images/nav-logo.png"
+                  alt="Newlife"
+                  width={160}
+                  height={90}
+                />
+              </Link>
             </div>
           </div>
         </div>
@@ -80,12 +84,14 @@ const PrayerRequestModal: React.FC<PrayerRequestModalProps> = ({
         <div className="w-full bg-white p-8 flex flex-col">
           {/* Header */}
           <div className="items-center space-x-3 mb-6">
-            <Image
-              src="/images/nav-logo.png"
-              alt="Newlife"
-              width={160}
-              height={90}
-            />
+            <Link href={PAGE_URL.HOME}>
+              <Image
+                src="/images/nav-logo.png"
+                alt="Newlife"
+                width={160}
+                height={90}
+              />
+            </Link>
           </div>
 
           {/* Title */}

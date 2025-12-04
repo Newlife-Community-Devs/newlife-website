@@ -3,6 +3,7 @@ import { EventData, Prayer, PrayerRequest } from "@/models";
 export enum PAGE_URL {
   PRAYER_REQUEST = "",
   ADMIN_LOGIN = "/prayer-request/admin/",
+  HOME = "/"
 }
 export enum API_BASE_URL {
   PRAYER = "https://newlife-prayer-wall-backend-1gq0w2ror.vercel.app/",
