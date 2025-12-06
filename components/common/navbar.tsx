@@ -6,6 +6,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import MobileNavbar, { NAV_LINKS } from "./mobileNavbar";
+import { motion } from "motion/react";
+import { navVariants } from "@/utils/animations.config";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,8 +18,12 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="w-full sticky h-[90px] bg-white shadow-[0px_4px_4px_0px_rgba(107,114,128,0.08)] flex items-center justify-between px-8 lg:px-20">
-        {/* Logo placeholder - you can add your church logo here */}
+      <motion.nav
+        variants={navVariants}
+        initial="hidden"
+        animate="visible"
+        className="w-full sticky h-[90px] bg-white shadow-[0px_4px_4px_0px_rgba(107,114,128,0.08)] flex items-center justify-between px-8 lg:px-20"
+      >
         <div className="flex-shrink-0">
           <Link href="/">
             <Image
@@ -29,7 +35,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Navigation Menu */}
         <div className="hidden lg:flex items-center space-x-5">
           {NAV_LINKS.map(({ label, href }) => (
             <Link
@@ -42,7 +47,6 @@ const Navbar = () => {
           ))}
         </div>
 
-        {/* Join Us Button */}
         <div className="flex-shrink-0">
           <button className="bg-[#FFD700] text-[#2E2E2E] px-6 py-3 rounded-xl border border-[#2E2E2E] border-opacity-20 text-sm font-normal hover:bg-[#E6C200] transition-colors">
             Join Us
@@ -88,7 +92,7 @@ const Navbar = () => {
             )}
           </button>
         </div>
-      </nav>
+      </motion.nav>
       {isOpen && <MobileNavbar />}
     </>
   );

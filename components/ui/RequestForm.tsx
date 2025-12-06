@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import Image from "next/image";
-import { API_BASE_URL, PAGE_URL } from "@/constants";
+import { PAGE_URL } from "@/constants";
 import { SuccessModal } from "@/components/common/SuccessModal";
 import { FailedModal } from "@/components/common/FailedModal";
 import LoadingSpinner from "../common/LoadingSpinner";
@@ -51,7 +51,7 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
         name: "",
         phoneNumber: "",
         prayerRequest,
-        keepAnonymous: isAnonymous,
+        keepAnonymous,
       });
     } else {
       setStep(3);
