@@ -28,6 +28,18 @@ const SermonSection = () => {
             {/* Sermon Details */}
           </div>
         </div>
+        <div className="pt-4">
+          <iframe
+            src="https://player.rss.com/the-newlife-podcast/latest?theme=default&v=2"
+            title="The Newlife Podcast"
+            width="100%"
+            height="202px"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            scrolling="no"
+          />
+        </div>
       </div>
     </section>
   );
