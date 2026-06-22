@@ -8,15 +8,6 @@ const UpcomingSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
 
-  // Auto-advance carousel every 5 seconds
-  useEffect(() => {
-    const timer = setInterval(() => {
-      nextSlide();
-    }, 5000);
-
-    return () => clearInterval(timer);
-  }, [currentSlide]);
-
   const nextSlide = () => {
     setDirection(1);
     setCurrentSlide((prev) => (prev + 1) % events.length);
@@ -26,6 +17,15 @@ const UpcomingSection = () => {
     setDirection(-1);
     setCurrentSlide((prev) => (prev - 1 + events.length) % events.length);
   };
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      nextSlide();
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [currentSlide]);
 
   const goToSlide = (index: number) => {
     setDirection(index > currentSlide ? 1 : -1);
