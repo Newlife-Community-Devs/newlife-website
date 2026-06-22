@@ -117,6 +117,7 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
     [onView, onApprove, onDelete]
   );
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: tableData,
     columns,
