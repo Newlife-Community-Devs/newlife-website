@@ -1,4 +1,3 @@
-import React from "react";
 import StatsCard from "../common/StatsCard";
 import PrayerRequestTable from "../ui/PrayerRequestTable";
 

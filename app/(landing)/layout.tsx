@@ -1,13 +1,12 @@
 import Footer from "@/components/common/footer";
 import Navbar from "@/components/common/navbar";
 import { LayoutComponent } from "@/models";
-import React from "react";
 
 const Layout: LayoutComponent = ({ children }) => {
   return (
     <>
       <Navbar />
-      {children}
+      <main className="pt-[80px]">{children}</main>
       <Footer />
     </>
   );

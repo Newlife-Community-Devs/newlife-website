@@ -1,4 +1,3 @@
-import React from 'react'
 import AboutHero from '@/components/ui/about-us/sections/Hero'
 import PastorProfile from '@/components/ui/about-us/sections/PastorProfile'
 import Philosophy from '@/components/ui/about-us/sections/Philosophy'
