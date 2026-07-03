@@ -33,7 +33,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       </div>
       <div className="inline-flex items-center px-4 py-2 lg:px-5 lg:py-1 mt-1 lg:mt-4 bg-[#FFFCEB] rounded-full text-center lg:flex-1 lg:max-w-2xl">
         <span className="text-gray-800 text-sm lg:text-lg font-bold w-full">
-          {`2025 Theme: "The Holy Spirit, Power Behind God's Kingdom"`}
+          {`${new Date().getFullYear()} Theme: "The Holy Spirit, Power Behind God's Kingdom"`}
         </span>
       </div>
       {hasDailyWord && (
