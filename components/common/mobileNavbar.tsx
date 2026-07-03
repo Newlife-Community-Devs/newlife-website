@@ -65,7 +65,7 @@ const MobileNavbar = ({ isOpen, onClose }: MobileNavbarProps) => {
                   <Link
                     href="#"
                     onClick={onClose}
-                    className="block w-full bg-[#FFD700] text-[#2E2E2E] text-center py-3 rounded-xl font-bold hover:bg-[#E6C200] transition-colors"
+                    className="block w-full bg-[#FFD700] text-[#2E2E2E] text-center py-3 rounded-xl font-semibold hover:bg-[#E6C200] transition-colors"
                   >
                     Join Us
                   </Link>

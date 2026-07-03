@@ -72,7 +72,7 @@ const Navbar = () => {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="hidden sm:inline-flex bg-[#FFD700] text-[#2E2E2E] px-5 py-2.5 rounded-xl text-sm font-bold hover:bg-[#E6C200] transition-colors shadow-sm"
+            className="hidden sm:inline-flex bg-[#FFD700] text-[#2E2E2E] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#E6C200] transition-colors shadow-sm"
           >
             Join Us
           </motion.button>
