@@ -7,7 +7,7 @@ import {
   LayoutDashboard,
   Menu,
 } from "lucide-react";
-import React, { ReactNode, useState } from "react";
+import { ReactNode, useState } from "react";
 import NavItem from "./NavItem";
 import Image from "next/image";
 import { usePathname } from "next/navigation";

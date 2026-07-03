@@ -1,92 +1,111 @@
 "use client";
+
 import { motion } from "motion/react";
-import React from "react";
+import { fadeInUp, staggerContainer } from "@/utils/animations";
+
+const gatherings = [
+  {
+    title: "Worship Service",
+    day: "Sunday",
+    time: "8:30 AM - 12:00 PM",
+    iconColor: "bg-[#FFD700]",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+      />
+    ),
+  },
+  {
+    title: "Youth Prayer Time",
+    day: "Tuesday",
+    time: "7:00 PM - 8:30 PM",
+    iconColor: "bg-[#D62828]",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+      />
+    ),
+  },
+  {
+    title: "Mid-Week & Teaching Service",
+    day: "Wednesday",
+    time: "7:00 PM - 9:00 PM",
+    iconColor: "bg-[#24195D]",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+      />
+    ),
+  },
+  {
+    title: "Encounter Service",
+    day: "Friday",
+    time: "7:00 PM - 9:00 PM",
+    iconColor: "bg-[#0F00B2]",
+    icon: (
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+      />
+    ),
+  },
+];
 
 const WeeklySection = () => {
-  const gatherings = [
-    {
-      title: "Worship Service",
-      day: "Sunday",
-      time: "8:30 AM - 12:00 PM",
-      bgColor: "bg-[#FFD700]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-        />
-      ),
-    },
-    {
-      title: "Youth Prayer Time",
-      day: "Tuesday",
-      time: "7:00 PM - 8:30 PM",
-      bgColor: "bg-[#D62828]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-        />
-      ),
-    },
-    {
-      title: "Mid-Week & Teaching Service",
-      day: "Wednesday",
-      time: "7:00 PM - 9:00 PM",
-      bgColor: "bg-[#24195D]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-        />
-      ),
-    },
-    {
-      title: "Encounter Service",
-      day: "Friday",
-      time: "7:00 PM - 9:00 PM",
-      bgColor: "bg-[#0F00B2]",
-      icon: (
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-        />
-      ),
-    },
-  ];
-
   return (
-    <section className="w-full bg-[#FCFCFC] py-20 px-4 lg:px-8">
+    <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-4xl lg:text-5xl font-bold text-black text-center mb-8">
+        <motion.h2
+          initial={{ opacity: 0, y: -15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-[#1A1A1A] text-center mb-3"
+        >
           Our Weekly Gatherings
-        </h2>
+        </motion.h2>
 
-        <p className="text-xl text-black text-center mb-12 max-w-4xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-base sm:text-lg md:text-xl text-[#2E2E2E] text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
+        >
           Join us throughout the week for worship, study, fellowship, and prayer
-        </p>
+        </motion.p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 bg-gray-100 rounded-xl p-12 shadow-lg">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6"
+        >
           {gatherings.map((gathering, index) => (
             <motion.div
-              initial={{ x: [0, 0, 0] }}
-              whileInView={{ x: [0, 100, 0] }}
               key={index}
-              className=""
+              variants={fadeInUp}
+              whileHover={{ y: -3 }}
+              className="bg-white border border-gray-200 rounded-xl p-5 sm:p-6 shadow-sm"
             >
-              <div className="flex items-center gap-4 mb-4">
+              <div className="flex items-center gap-4">
                 <div
-                  className={`w-16 h-16 ${gathering.bgColor} rounded-xl flex items-center justify-center`}
+                  className={`w-12 h-12 sm:w-14 sm:h-14 ${gathering.iconColor} rounded-xl flex items-center justify-center flex-shrink-0`}
                 >
                   <svg
-                    className="w-8 h-8 text-[#FCFCFC]"
+                    className="w-6 h-6 sm:w-7 sm:h-7 text-white"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -94,20 +113,20 @@ const WeeklySection = () => {
                     {gathering.icon}
                   </svg>
                 </div>
-                <div>
-                  <h3 className="text-xl font-semibold text-black">
+                <div className="min-w-0">
+                  <h3 className="font-heading text-base sm:text-lg font-semibold text-[#1A1A1A] truncate">
                     {gathering.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-[#6B7280]">
+                  <div className="flex items-center gap-2 text-sm sm:text-base text-[#6B7280] flex-wrap">
                     <span className="font-medium">{gathering.day}</span>
-                    <span>•</span>
+                    <span className="text-[#C1C5CE]">•</span>
                     <span>{gathering.time}</span>
                   </div>
                 </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

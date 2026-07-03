@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import PrayerCard from "./common/PrayerCard";
 import PageHeader from "./common/PageHeader";
@@ -38,11 +38,7 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
 
   const limit = 20;
 
-  useEffect(() => {
-    fetchPrayers();
-  }, [currentPage]);
-
-  const fetchPrayers = async () => {
+  const fetchPrayers = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -92,7 +88,12 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage]);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchPrayers();
+  }, [fetchPrayers]);
 
   return (
     <div className="min-h-screen bg-gray-50 p-4">
