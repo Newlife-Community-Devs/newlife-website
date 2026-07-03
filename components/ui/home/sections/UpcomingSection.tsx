@@ -1,8 +1,9 @@
 "use client";
+
 import { events } from "@/constants";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { PanInfo } from "framer-motion";
+import type { PanInfo } from "framer-motion";
 
 const UpcomingSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -18,12 +19,10 @@ const UpcomingSection = () => {
     setCurrentSlide((prev) => (prev - 1 + events.length) % events.length);
   };
 
-  // Auto-advance carousel every 5 seconds
   useEffect(() => {
     const timer = setInterval(() => {
       nextSlide();
     }, 5000);
-
     return () => clearInterval(timer);
   }, [currentSlide]);
 
@@ -32,62 +31,65 @@ const UpcomingSection = () => {
     setCurrentSlide(index);
   };
 
-  // Handle drag end to detect swipe direction
-  const handleDragEnd = (event: PointerEvent, info: PanInfo) => {
+  const handleDragEnd = (_: PointerEvent, info: PanInfo) => {
     const swipeThreshold = 50;
     const { offset, velocity } = info;
-
-    // Swipe left (next slide)
     if (offset.x < -swipeThreshold || velocity.x < -500) {
       nextSlide();
-    }
-    // Swipe right (previous slide)
-    else if (offset.x > swipeThreshold || velocity.x > 500) {
+    } else if (offset.x > swipeThreshold || velocity.x > 500) {
       prevSlide();
     }
   };
 
   const currentEvent = events[currentSlide];
 
+  const slideVariants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 400 : -400,
+      opacity: 0,
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+    },
+    exit: (dir: number) => ({
+      x: dir < 0 ? 400 : -400,
+      opacity: 0,
+    }),
+  };
+
   return (
-    <section className="w-full py-20 px-4 lg:px-8">
+    <section className="w-full bg-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl lg:text-5xl font-bold text-black text-center mb-8"
+          initial={{ opacity: 0, y: -15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-[#1A1A1A] text-center mb-3"
         >
           Upcoming Events
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-xl text-black text-center mb-12 max-w-4xl mx-auto"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="text-base sm:text-lg md:text-xl text-[#2E2E2E] text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
         >
           Join us for our exciting upcoming church events!
         </motion.p>
 
-        {/* Event Carousel */}
-        <div className="bg-[#FAF1DE] rounded-xl p-8 shadow-lg relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#FAF1DE] to-[#FAF1DE]/60 rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg relative overflow-hidden">
           <AnimatePresence initial={false} mode="wait" custom={direction}>
             <motion.div
               key={currentSlide}
               custom={direction}
-              initial={{
-                x: direction > 0 ? 1000 : -1000,
-                opacity: 0,
-              }}
-              animate={{
-                x: 0,
-                opacity: 1,
-              }}
-              exit={{
-                x: direction < 0 ? 1000 : -1000,
-                opacity: 0,
-              }}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
               transition={{
                 x: { type: "spring", stiffness: 300, damping: 30 },
                 opacity: { duration: 0.2 },
@@ -96,67 +98,43 @@ const UpcomingSection = () => {
               dragConstraints={{ left: 0, right: 0 }}
               dragElastic={0.2}
               onDragEnd={handleDragEnd}
-              className="flex flex-col lg:flex-row gap-8 items-center cursor-grab active:cursor-grabbing"
+              className="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center cursor-grab active:cursor-grabbing"
             >
-              {/* Event Image */}
               <div className="w-full lg:w-1/2">
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                  className="aspect-video bg-gradient-to-br from-[#24195D] to-[#E53935] rounded-xl flex items-center justify-center"
-                >
-                  <div className="text-white text-center">
-                    <motion.div
-                      initial={{ scale: 0.8, opacity: 0 }}
-                      animate={{ scale: 1, opacity: 1 }}
-                      transition={{ delay: 0.2 }}
-                      className="text-4xl font-bold mb-2"
-                    >
-                      {currentEvent.preview}
-                    </motion.div>
-                    <motion.div
-                      initial={{ y: 20, opacity: 0 }}
-                      animate={{ y: 0, opacity: 0.9 }}
-                      transition={{ delay: 0.3 }}
-                      className="text-lg"
-                    >
+                <div className="relative aspect-video bg-gradient-to-br from-[#24195D] to-[#D62828] rounded-xl overflow-hidden">
+                  <div className="absolute top-3 left-3 z-10">
+                    <div className="bg-white/20 backdrop-blur-sm rounded-lg px-3 py-1.5 text-white text-xs font-bold">
                       {currentEvent.badge}
-                    </motion.div>
+                    </div>
                   </div>
-                </motion.div>
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="text-3xl sm:text-4xl font-bold mb-1">
+                        {currentEvent.preview}
+                      </div>
+                      <div className="text-sm sm:text-base text-white/80">
+                        {currentEvent.badge}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
-              {/* Event Details */}
-              <div className="w-full lg:w-1/2 space-y-6">
-                <motion.div
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.1 }}
-                  className="inline-flex items-center px-4 py-2 bg-[#E53935] rounded-full"
-                >
-                  <span className="text-[#F5F5F5] text-sm font-bold">
+              <div className="w-full lg:w-1/2 space-y-4 sm:space-y-5">
+                <div className="inline-flex items-center px-3 py-1.5 bg-[#D62828] rounded-full">
+                  <span className="text-white text-xs sm:text-sm font-bold">
                     {currentEvent.badge}
                   </span>
-                </motion.div>
+                </div>
 
-                <motion.h3
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.15 }}
-                  className="text-2xl lg:text-3xl font-semibold text-black"
-                >
+                <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#1A1A1A]">
                   {currentEvent.title}
-                </motion.h3>
+                </h3>
 
-                <motion.div
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.2 }}
-                  className="space-y-3"
-                >
-                  <div className="flex items-center gap-3 text-[#6B7280]">
+                <div className="space-y-2.5">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-[#6B7280]">
                     <svg
-                      className="w-6 h-6"
+                      className="w-5 h-5 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -170,10 +148,9 @@ const UpcomingSection = () => {
                     </svg>
                     <span>{currentEvent.date}</span>
                   </div>
-
-                  <div className="flex items-center gap-3 text-[#6B7280]">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-[#6B7280]">
                     <svg
-                      className="w-6 h-6"
+                      className="w-5 h-5 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -187,10 +164,9 @@ const UpcomingSection = () => {
                     </svg>
                     <span>{currentEvent.time}</span>
                   </div>
-
-                  <div className="flex items-center gap-3 text-[#6B7280]">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-[#6B7280]">
                     <svg
-                      className="w-6 h-6"
+                      className="w-5 h-5 flex-shrink-0"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -210,28 +186,20 @@ const UpcomingSection = () => {
                     </svg>
                     <span>{currentEvent.location}</span>
                   </div>
-                </motion.div>
+                </div>
 
-                <motion.p
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.25 }}
-                  className="text-lg text-black leading-relaxed"
-                >
+                <p className="text-sm sm:text-base text-[#1A1A1A] leading-relaxed">
                   {currentEvent.description}
-                </motion.p>
+                </p>
 
                 <motion.button
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="bg-[#24195D] text-[#F5F5F5] px-8 py-4 rounded-lg font-bold hover:bg-[#1A0F4A] transition-colors duration-300 flex items-center gap-2"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="bg-[#24195D] text-white px-6 sm:px-8 py-3 rounded-xl font-bold hover:bg-[#24195D]/90 transition-colors duration-300 flex items-center gap-2 shadow-md"
                 >
                   Learn More
                   <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -248,20 +216,19 @@ const UpcomingSection = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Carousel Indicators */}
-          <div className="flex justify-center gap-3 mt-8">
+          <div className="flex justify-center gap-2.5 mt-6 sm:mt-8">
             {events.map((_, index) => (
               <motion.button
                 key={index}
                 onClick={() => goToSlide(index)}
-                whileHover={{ scale: 1.2 }}
+                whileHover={{ scale: 1.3 }}
                 whileTap={{ scale: 0.9 }}
                 animate={{
-                  scale: index === currentSlide ? 1.25 : 1,
+                  width: index === currentSlide ? 24 : 8,
                   backgroundColor:
-                    index === currentSlide ? "#FFCE00" : "#C1C5CE",
+                    index === currentSlide ? "#FFD700" : "#C1C5CE",
                 }}
-                className="w-3 h-3 rounded-full"
+                className="h-2 rounded-full"
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
