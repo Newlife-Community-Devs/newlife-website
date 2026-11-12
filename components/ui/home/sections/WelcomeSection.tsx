@@ -25,7 +25,7 @@ const WelcomeSection = () => {
           >
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/pastor-message.png"
+                src="/images/pastor-message.jpg"
                 alt="Reverend Michael Opoku - Pastor of Newlife Community Baptist Church"
                 fill
                 className="object-contain"

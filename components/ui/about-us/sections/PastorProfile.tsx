@@ -12,7 +12,7 @@ const PastorProfile = () => {
             <div className="relative">
               <div className="aspect-[4/5] rounded-xl overflow-hidden shadow-lg">
                 <Image
-                  src="/images/pastor-message.png"
+                  src="/images/pastor-message.jpg"
                   alt="Rev. Michael A. Opoku - Senior Pastor"
                   width={500}
                   height={625}

@@ -7,7 +7,7 @@ const AboutHero = () => {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/images/about-hero.png"
+          src="/images/about-hero.jpg"
           alt="Newlife Community Baptist Church - About Us"
           fill
           className="object-cover"
