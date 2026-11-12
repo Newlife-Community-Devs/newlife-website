@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import { fadeInUp, scaleIn } from "@/utils/animations";
 
-const YOUTUBELINK = process.env.YOUTUBE_LIVE_LINK!;
+const YOUTUBELINK = process.env.NEXT_PUBLIC_YOUTUBE_LIVE_LINK ?? "";
 
 const SermonSection = () => {
   return (
@@ -14,7 +14,7 @@ const SermonSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-[#1A1A1A] text-center mb-3"
+          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-ink text-center mb-3"
         >
           Latest Sermon
         </motion.h2>
@@ -24,7 +24,7 @@ const SermonSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-base sm:text-lg md:text-xl text-[#2E2E2E] text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-body text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
         >
           Watch our latest message and grow in your faith journey
         </motion.p>
@@ -52,29 +52,29 @@ const SermonSection = () => {
 
             <div className="space-y-5">
               <div className="space-y-3">
-                <div className="inline-flex items-center px-3 py-1 bg-[#FFD700]/15 rounded-full">
-                  <span className="text-xs font-semibold text-[#E6C200] uppercase tracking-wider">
+                <div className="inline-flex items-center px-3 py-1 bg-gold/15 rounded-full">
+                  <span className="text-xs font-semibold text-gold-hover uppercase tracking-wider">
                     Current Series
                   </span>
                 </div>
-                <h3 className="font-heading text-xl sm:text-2xl font-bold text-[#1A1A1A] leading-tight">
+                <h3 className="font-heading text-xl sm:text-2xl font-bold text-ink leading-tight">
                   The Holy Spirit, Power Behind God&apos;s Kingdom
                 </h3>
-                <p className="text-sm sm:text-base text-[#6B7280] leading-relaxed">
+                <p className="text-sm sm:text-base text-muted leading-relaxed">
                   Experience the transformative power of the Holy Spirit in your
                   daily walk with Christ.
                 </p>
               </div>
 
               <div className="flex items-center gap-3 pt-2">
-                <div className="w-10 h-10 rounded-full bg-[#FFD700] flex items-center justify-center text-[#2E2E2E] font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-gold flex items-center justify-center text-body font-bold text-sm">
                   N
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-[#1A1A1A]">
+                  <p className="text-sm font-semibold text-ink">
                     NLCBC Media
                   </p>
-                  <p className="text-xs text-[#6B7280]">Latest Message</p>
+                  <p className="text-xs text-muted">Latest Message</p>
                 </div>
               </div>
 
@@ -107,7 +107,7 @@ const SermonSection = () => {
                   />
                 </svg>
               </div>
-              <span className="font-heading text-base sm:text-lg font-semibold text-[#1A1A1A]">
+              <span className="font-heading text-base sm:text-lg font-semibold text-ink">
                 Listen to the Podcast
               </span>
             </div>

@@ -20,7 +20,7 @@ const HeroSection = () => {
         />
         <motion.div
           style={{ opacity }}
-          className="absolute inset-0 bg-gradient-to-br from-[#001F3F]/80 via-[#001F3F]/70 to-[#001F3F]/60"
+          className="absolute inset-0 bg-gradient-to-br from-navy/80 via-navy/70 to-navy/60"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
       </motion.div>
@@ -32,8 +32,8 @@ const HeroSection = () => {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="mb-6 md:mb-8"
         >
-          <div className="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 bg-[#FFFCEB]/90 rounded-full shadow-sm">
-            <span className="text-[#2E2E2E] text-sm sm:text-base md:text-lg font-semibold">
+          <div className="inline-flex items-center px-4 sm:px-5 py-1.5 sm:py-2 bg-gold-soft/90 rounded-full shadow-sm">
+            <span className="text-body text-sm sm:text-base md:text-lg font-semibold">
               {`${new Date().getFullYear()} Theme: "The Holy Spirit, Power Behind God's Kingdom"`}
             </span>
           </div>
@@ -47,7 +47,7 @@ const HeroSection = () => {
         >
           Welcome to
           <br />
-          <span className="text-[#FFD700]">Newlife Community Baptist Church</span>
+          <span className="text-gold">Newlife Community Baptist Church</span>
         </motion.h1>
 
         <motion.p

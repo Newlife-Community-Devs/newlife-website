@@ -66,7 +66,7 @@ const UpcomingSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-[#1A1A1A] text-center mb-3"
+          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-ink text-center mb-3"
         >
           Upcoming Events
         </motion.h2>
@@ -76,7 +76,7 @@ const UpcomingSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-base sm:text-lg md:text-xl text-[#2E2E2E] text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-body text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
         >
           Join us for our exciting upcoming church events!
         </motion.p>
@@ -127,12 +127,12 @@ const UpcomingSection = () => {
                   </span>
                 </div>
 
-                <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-[#1A1A1A]">
+                <h3 className="font-heading text-xl sm:text-2xl lg:text-3xl font-semibold text-ink">
                   {currentEvent.title}
                 </h3>
 
                 <div className="space-y-2.5">
-                  <div className="flex items-center gap-3 text-sm sm:text-base text-[#6B7280]">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-muted">
                     <svg
                       className="w-5 h-5 flex-shrink-0"
                       fill="none"
@@ -148,7 +148,7 @@ const UpcomingSection = () => {
                     </svg>
                     <span>{currentEvent.date}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm sm:text-base text-[#6B7280]">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-muted">
                     <svg
                       className="w-5 h-5 flex-shrink-0"
                       fill="none"
@@ -164,7 +164,7 @@ const UpcomingSection = () => {
                     </svg>
                     <span>{currentEvent.time}</span>
                   </div>
-                  <div className="flex items-center gap-3 text-sm sm:text-base text-[#6B7280]">
+                  <div className="flex items-center gap-3 text-sm sm:text-base text-muted">
                     <svg
                       className="w-5 h-5 flex-shrink-0"
                       fill="none"
@@ -188,7 +188,7 @@ const UpcomingSection = () => {
                   </div>
                 </div>
 
-                <p className="text-sm sm:text-base text-[#1A1A1A] leading-relaxed">
+                <p className="text-sm sm:text-base text-ink leading-relaxed">
                   {currentEvent.description}
                 </p>
 
@@ -226,7 +226,9 @@ const UpcomingSection = () => {
                 animate={{
                   width: index === currentSlide ? 24 : 8,
                   backgroundColor:
-                    index === currentSlide ? "#FFD700" : "#C1C5CE",
+                    index === currentSlide
+                      ? "var(--color-gold)"
+                      : "var(--color-muted)",
                 }}
                 className="h-2 rounded-full"
                 aria-label={`Go to slide ${index + 1}`}

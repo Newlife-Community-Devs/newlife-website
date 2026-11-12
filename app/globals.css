@@ -10,6 +10,16 @@
   --font-body: var(--font-body);
 }
 
+@theme {
+  --color-navy: #001f3f;
+  --color-gold: #ffd700;
+  --color-gold-hover: #e6c200;
+  --color-gold-soft: #fffceb;
+  --color-ink: #1a1a1a;
+  --color-body: #2e2e2e;
+  --color-muted: #6b7280;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

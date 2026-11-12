@@ -45,7 +45,7 @@ const PastorProfile = () => {
             <Stats/>
             
             {/* Quote */}
-            <div className="bg-[#FFD700] p-6 rounded-lg">
+            <div className="bg-gold p-6 rounded-lg">
               <p className="text-lg text-gray-800 italic font-medium">
                {` "My heart's desire is to see every member of our church family discover their purpose in God's kingdom and live it out with passion and power."`}
               </p>

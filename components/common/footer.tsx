@@ -10,11 +10,11 @@ import { motion } from "motion/react";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#001F3F] pt-16 sm:pt-20 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8">
+    <footer className="w-full bg-navy pt-16 sm:pt-20 pb-8 sm:pb-10 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12">
           <div className="text-center sm:text-left">
-            <h3 className="text-[#FFD700] text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-5">
+            <h3 className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-5">
               Quick Links
             </h3>
             <nav className="grid grid-cols-2 gap-x-4 gap-y-2.5">
@@ -30,7 +30,7 @@ const Footer = () => {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-[#F5F5F5] text-sm sm:text-base hover:text-[#FFD700] transition-colors duration-200"
+                  className="text-[#F5F5F5] text-sm sm:text-base hover:text-gold transition-colors duration-200"
                 >
                   {link.label}
                 </Link>
@@ -54,7 +54,7 @@ const Footer = () => {
               believers.
             </p>
             <div>
-              <h3 className="text-[#FFD700] text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-5">
+              <h3 className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-5">
                 Stay Connected
               </h3>
               <div className="flex items-center gap-4 sm:gap-5">
@@ -83,7 +83,7 @@ const Footer = () => {
                   >
                     <Link
                       href={href}
-                      className="text-[#C1C5CE] hover:text-[#FFD700] transition-colors duration-200 block"
+                      className="text-[#C1C5CE] hover:text-gold transition-colors duration-200 block"
                     >
                       <Icon className="size-5 sm:size-6" />
                     </Link>
@@ -95,7 +95,7 @@ const Footer = () => {
 
           <div className="space-y-6 sm:space-y-8">
             <div>
-              <h3 className="text-[#FFD700] text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-5">
+              <h3 className="text-gold text-xs sm:text-sm font-semibold uppercase tracking-wider mb-4 sm:mb-5">
                 Contact Info
               </h3>
               <div className="space-y-4">
@@ -134,7 +134,7 @@ const Footer = () => {
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="bg-[#FFD700] text-[#2E2E2E] px-4 py-2 rounded-lg text-sm font-bold hover:bg-[#E6C200] transition-colors flex-shrink-0"
+                    className="bg-gold text-body px-4 py-2 rounded-lg text-sm font-bold hover:bg-gold-hover transition-colors flex-shrink-0"
                   >
                     Subscribe
                   </motion.button>
@@ -147,7 +147,7 @@ const Footer = () => {
         <div className="border-t border-white/10 my-8 sm:my-10" />
 
         <div className="text-center">
-          <p className="text-[#FFD700]/70 text-sm">
+          <p className="text-gold/70 text-sm">
             &copy; {new Date().getFullYear()} Newlife Community Baptist Church. All rights reserved.
           </p>
         </div>

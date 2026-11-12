@@ -39,9 +39,9 @@ const WelcomeSection = () => {
             className="w-full lg:w-[62%] space-y-5 sm:space-y-6"
           >
             <div className="flex items-center gap-4">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#FFD700] rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gold rounded-full flex items-center justify-center flex-shrink-0">
                 <svg
-                  className="w-6 h-6 sm:w-7 sm:h-7 text-[#1A1A1A]"
+                  className="w-6 h-6 sm:w-7 sm:h-7 text-ink"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -54,13 +54,13 @@ const WelcomeSection = () => {
                   />
                 </svg>
               </div>
-              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-[#1A1A1A]">
+              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-ink">
                 Welcome Message
               </h3>
             </div>
 
             <div className="space-y-4">
-              <p className="text-base sm:text-lg text-[#6B7280] leading-relaxed">
+              <p className="text-base sm:text-lg text-muted leading-relaxed">
                 Welcome to New Life Community Baptist Church, a vibrant family of
                 believers committed to growing in Christ and serving our
                 community. As part of the Ghana Baptist Convention, we stand on a
@@ -68,7 +68,7 @@ const WelcomeSection = () => {
                 this generation.
               </p>
 
-              <p className="text-base sm:text-lg text-[#6B7280] leading-relaxed">
+              <p className="text-base sm:text-lg text-muted leading-relaxed">
                 Our church is more than a building or weekly service — we are a
                 community united by God&apos;s love, dedicated to making
                 disciples who will transform Ghana and beyond. Whether
@@ -112,11 +112,11 @@ const WelcomeSection = () => {
                   />
                 </svg>
               </div>
-              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-[#1A1A1A]">
+              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-ink">
                 Our Mission
               </h3>
             </div>
-            <p className="text-base sm:text-lg text-[#6B7280] leading-relaxed">
+            <p className="text-base sm:text-lg text-muted leading-relaxed">
               To spread God&apos;s love and grace through worship, fellowship,
               and community service.
             </p>
@@ -149,11 +149,11 @@ const WelcomeSection = () => {
                   />
                 </svg>
               </div>
-              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-[#1A1A1A]">
+              <h3 className="font-heading text-xl sm:text-2xl font-semibold text-ink">
                 Our Vision
               </h3>
             </div>
-            <p className="text-base sm:text-lg text-[#6B7280] leading-relaxed">
+            <p className="text-base sm:text-lg text-muted leading-relaxed">
               A thriving community where every person experiences God&apos;s
               transformative love.
             </p>

@@ -14,7 +14,7 @@ const AboutHero = () => {
           priority
         />
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[#001F3F]/80 to-[#001F3F]/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-navy/80 to-navy/60"></div>
       </div>
 
       {/* Content */}

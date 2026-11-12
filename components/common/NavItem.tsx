@@ -17,7 +17,7 @@ const NavItem = ({
   return (
     <div
       className={`flex items-center ${
-        activeUrl === href ? "bg-[#FFD700]" : ""
+        activeUrl === href ? "bg-gold" : ""
       } rounded-xl `}
     >
       <Link

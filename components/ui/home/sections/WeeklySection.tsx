@@ -8,7 +8,7 @@ const gatherings = [
     title: "Worship Service",
     day: "Sunday",
     time: "8:30 AM - 12:00 PM",
-    iconColor: "bg-[#FFD700]",
+    iconColor: "bg-gold",
     icon: (
       <path
         strokeLinecap="round"
@@ -71,7 +71,7 @@ const WeeklySection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-[#1A1A1A] text-center mb-3"
+          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-ink text-center mb-3"
         >
           Our Weekly Gatherings
         </motion.h2>
@@ -81,7 +81,7 @@ const WeeklySection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-base sm:text-lg md:text-xl text-[#2E2E2E] text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-body text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
         >
           Join us throughout the week for worship, study, fellowship, and prayer
         </motion.p>
@@ -114,10 +114,10 @@ const WeeklySection = () => {
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <h3 className="font-heading text-base sm:text-lg font-semibold text-[#1A1A1A] truncate">
+                  <h3 className="font-heading text-base sm:text-lg font-semibold text-ink truncate">
                     {gathering.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-sm sm:text-base text-[#6B7280] flex-wrap">
+                  <div className="flex items-center gap-2 text-sm sm:text-base text-muted flex-wrap">
                     <span className="font-medium">{gathering.day}</span>
                     <span className="text-[#C1C5CE]">•</span>
                     <span>{gathering.time}</span>

@@ -38,7 +38,7 @@ const Philosophy = () => {
               </p>
               
               {/* Learn More Button */}
-              <button className="flex items-center gap-2 text-[#6B7280] hover:text-[#24195D] transition-colors">
+              <button className="flex items-center gap-2 text-muted hover:text-[#24195D] transition-colors">
                 Learn More
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -67,7 +67,7 @@ const Philosophy = () => {
               </p>
               
               {/* Learn More Button */}
-              <button className="flex items-center gap-2 text-[#6B7280] hover:text-[#D62828] transition-colors">
+              <button className="flex items-center gap-2 text-muted hover:text-[#D62828] transition-colors">
                 Learn More
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

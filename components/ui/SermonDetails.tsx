@@ -10,7 +10,7 @@ const SermonDetails = () => {
         {`"Walking in Faith: Trusting God's Plan"`}
       </h3>
 
-      <p className="text-lg text-[#6B7280] leading-relaxed">
+      <p className="text-lg text-muted leading-relaxed">
         {`Reverend Henry shares powerful insights on trusting God's timing and walking boldly in faith, even when the path ahead seems uncertain.`}
       </p>
 

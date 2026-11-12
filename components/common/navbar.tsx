@@ -60,10 +60,10 @@ const Navbar = () => {
             <Link
               key={label}
               href={href}
-              className="text-[#1A1A1A] text-sm font-medium hover:text-[#FFD700] transition-colors duration-200 relative group"
+              className="text-ink text-sm font-medium hover:text-gold transition-colors duration-200 relative group"
             >
               {label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#FFD700] transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gold transition-all duration-300 group-hover:w-full" />
             </Link>
           ))}
         </div>
@@ -72,13 +72,13 @@ const Navbar = () => {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="hidden sm:inline-flex bg-[#FFD700] text-[#2E2E2E] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#E6C200] transition-colors shadow-sm"
+            className="hidden sm:inline-flex bg-gold text-body px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-gold-hover transition-colors shadow-sm"
           >
             Join Us
           </motion.button>
 
           <button
-            className="lg:hidden inline-flex items-center justify-center rounded-md text-[#1A1A1A] hover:text-[#FFD700] transition-colors duration-200 p-2"
+            className="lg:hidden inline-flex items-center justify-center rounded-md text-ink hover:text-gold transition-colors duration-200 p-2"
             onClick={toggleNavbar}
             aria-label="Toggle navigation"
           >

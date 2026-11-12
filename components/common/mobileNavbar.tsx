@@ -50,7 +50,7 @@ const MobileNavbar = ({ isOpen, onClose }: MobileNavbarProps) => {
                     <Link
                       href={href}
                       onClick={onClose}
-                      className="block w-full text-[#1A1A1A] text-base font-medium hover:bg-[#FFD700]/10 hover:text-[#E6C200] rounded-lg px-4 py-3 transition-colors duration-200"
+                      className="block w-full text-ink text-base font-medium hover:bg-gold/10 hover:text-gold-hover rounded-lg px-4 py-3 transition-colors duration-200"
                     >
                       {label}
                     </Link>
@@ -65,7 +65,7 @@ const MobileNavbar = ({ isOpen, onClose }: MobileNavbarProps) => {
                   <Link
                     href="#"
                     onClick={onClose}
-                    className="block w-full bg-[#FFD700] text-[#2E2E2E] text-center py-3 rounded-xl font-semibold hover:bg-[#E6C200] transition-colors"
+                    className="block w-full bg-gold text-body text-center py-3 rounded-xl font-semibold hover:bg-gold-hover transition-colors"
                   >
                     Join Us
                   </Link>

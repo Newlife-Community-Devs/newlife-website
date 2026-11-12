@@ -117,7 +117,7 @@ const LifeProcessSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-[#1A1A1A] text-center mb-3"
+          className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-ink text-center mb-3"
         >
           Life Development Process
         </motion.h2>
@@ -127,7 +127,7 @@ const LifeProcessSection = () => {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15 }}
-          className="text-base sm:text-lg md:text-xl text-[#2E2E2E] text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
+          className="text-base sm:text-lg md:text-xl text-body text-center mb-10 sm:mb-12 max-w-3xl mx-auto"
         >
           Our intentional pathway for spiritual growth and development, designed
           to guide every believer from salvation to leadership
@@ -162,7 +162,7 @@ const LifeProcessSection = () => {
                   </svg>
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[10px] sm:text-xs text-[#6B7280] font-semibold uppercase tracking-wider">
+                  <p className="text-[10px] sm:text-xs text-muted font-semibold uppercase tracking-wider">
                     Module {mod.code}: {mod.title}
                   </p>
                   <h3
@@ -171,12 +171,12 @@ const LifeProcessSection = () => {
                   >
                     {mod.subtitle}
                   </h3>
-                  <p className="text-xs sm:text-sm text-[#2E2E2E] font-medium">
+                  <p className="text-xs sm:text-sm text-body font-medium">
                     {mod.tagline}
                   </p>
                 </div>
               </div>
-              <p className="text-xs sm:text-sm text-[#6B7280] text-center leading-relaxed flex-1">
+              <p className="text-xs sm:text-sm text-muted text-center leading-relaxed flex-1">
                 {mod.description}
               </p>
               <ProgressBar color={mod.color} index={index} />
