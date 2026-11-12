@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useModal } from "@/hooks/useModal";
 import { useRouter } from "next/navigation";
 import PageHeader from "../common/PageHeader";

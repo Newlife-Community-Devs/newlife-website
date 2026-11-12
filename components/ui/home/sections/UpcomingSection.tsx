@@ -3,7 +3,7 @@
 import { events } from "@/constants";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import type { PanInfo } from "framer-motion";
+import type { PanInfo } from "motion/react";
 
 const UpcomingSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
