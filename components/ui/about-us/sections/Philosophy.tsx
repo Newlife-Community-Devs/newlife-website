@@ -1,86 +1,112 @@
-"use client"
+"use client";
+
+import { motion } from "motion/react";
+import { Target, Users, ChevronRight } from "lucide-react";
+import { fadeInUp, staggerContainer, cardHover } from "@/utils/animations";
+
+const cards = [
+  {
+    tag: "Our Purpose",
+    icon: Target,
+    iconClasses: "bg-navy/10 text-navy",
+    tagClasses: "bg-navy text-white",
+    hoverText: "hover:text-navy",
+    description:
+      "Glorifying God by making disciples who exalt God, edify other believers and evangelize unbelievers starting in her own local community and extending disciple making to all the world.",
+  },
+  {
+    tag: "Our Product",
+    icon: Users,
+    iconClasses: "bg-gold/15 text-gold-hover",
+    tagClasses: "bg-gold text-body",
+    hoverText: "hover:text-gold-hover",
+    description:
+      "Mature, growing disciples who will emerge as leaders. We define a disciple as a believer who walks with God, lives the word, contributes to the work, and impacts the world.",
+  },
+];
 
 const Philosophy = () => {
   return (
-    <section className="w-full bg-white py-20 px-4 lg:px-8">
+    <section className="w-full bg-[rgba(255,215,0,0.04)] py-16 sm:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+          className="text-center mb-12 sm:mb-16"
+        >
+          <motion.h2
+            variants={fadeInUp}
+            className="font-heading text-[clamp(1.75rem,4vw,3rem)] font-bold text-ink mb-4"
+          >
             Our Ministry Philosophy
-          </h2>
-          <p className="text-xl lg:text-2xl text-black max-w-4xl mx-auto">
-            Our ministry is built on biblical foundations with clear purpose and measurable outcomes
-          </p>
-        </div>
+          </motion.h2>
+          <motion.p
+            variants={fadeInUp}
+            className="text-base sm:text-lg md:text-xl text-muted max-w-3xl mx-auto"
+          >
+            Our ministry is built on biblical foundations with clear purpose
+            and measurable outcomes
+          </motion.p>
+        </motion.div>
 
         {/* Philosophy Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          variants={staggerContainer}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8"
+        >
+          {cards.map((card) => (
+            <motion.div
+              key={card.tag}
+              variants={fadeInUp}
+              className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm"
+            >
+              <motion.div
+                initial="rest"
+                whileHover="hover"
+                variants={cardHover}
+                className="rounded-2xl h-full"
+              >
+                <div className="flex flex-col items-center text-center space-y-5 sm:space-y-6 h-full">
+                  {/* Icon */}
+                  <div
+                    className={`w-20 h-20 sm:w-24 sm:h-24 ${card.iconClasses} rounded-full flex items-center justify-center`}
+                  >
+                    <card.icon className="w-10 h-10 sm:w-12 sm:h-12" strokeWidth={1.5} />
+                  </div>
 
-          {/* Our Purpose Card */}
-          <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-lg">
-            <div className="flex flex-col items-center text-center space-y-6">
-              {/* Icon */}
-              <div className="w-24 h-24 bg-[rgba(51,34,148,0.2)] rounded-full flex items-center justify-center">
-                <svg className="w-12 h-12 text-[#24195D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
-              </div>
-              
-              {/* Tag */}
-              <div className="bg-[#24195D] text-white px-4 py-2 rounded-lg text-sm font-semibold">
-                Our Purpose
-              </div>
-              
-              {/* Description */}
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Glorifying God by making disciples who exalt God, edify other believers and evangelize unbelievers starting in her own local community and extending discipline making to all the world.
-              </p>
-              
-              {/* Learn More Button */}
-              <button className="flex items-center gap-2 text-muted hover:text-[#24195D] transition-colors">
-                Learn More
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
-          {/* Our Product Card */}
-          <div className="bg-white border border-gray-200 rounded-xl p-8 shadow-lg">
-            <div className="flex flex-col items-center text-center space-y-6">
-              {/* Icon */}
-              <div className="w-24 h-24 bg-[rgba(214,40,40,0.2)] rounded-full flex items-center justify-center">
-                <svg className="w-12 h-12 text-[#D62828]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              
-              {/* Tag */}
-              <div className="bg-[#D62828] text-white px-4 py-2 rounded-lg text-sm font-semibold">
-                Our Product
-              </div>
-              
-              {/* Description */}
-              <p className="text-lg text-gray-600 leading-relaxed">
-                Mature, growing disciples who will emerge as leaders. We define a disciple as a believer who walks with God, lives the word, contributes to the work, and impacts the world.
-              </p>
-              
-              {/* Learn More Button */}
-              <button className="flex items-center gap-2 text-muted hover:text-[#D62828] transition-colors">
-                Learn More
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </div>
-          </div>
+                  {/* Tag */}
+                  <div
+                    className={`${card.tagClasses} px-4 py-1.5 rounded-full text-sm font-semibold`}
+                  >
+                    {card.tag}
+                  </div>
 
-          
-        </div>
+                  {/* Description */}
+                  <p className="text-base sm:text-lg text-muted leading-relaxed">
+                    {card.description}
+                  </p>
+
+                  {/* Learn More Button */}
+                  <button
+                    className={`flex items-center gap-1.5 text-muted ${card.hoverText} transition-colors mt-auto font-medium`}
+                  >
+                    Learn More
+                    <ChevronRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Philosophy
+export default Philosophy;
