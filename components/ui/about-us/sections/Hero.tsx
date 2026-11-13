@@ -31,7 +31,7 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-gold text-sm sm:text-base md:text-lg font-semibold uppercase tracking-[0.2em] mb-4"
+          className="text-white text-sm sm:text-base md:text-lg font-semibold uppercase tracking-[0.2em] mb-4"
         >
           Who We Are
         </motion.p>
