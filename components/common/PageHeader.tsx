@@ -32,7 +32,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         </Link>
       </div>
       <div className="inline-flex items-center px-4 py-2 lg:px-5 lg:py-1 mt-1 lg:mt-4 bg-gold-soft rounded-full text-center lg:flex-1 lg:max-w-2xl">
-        <span className="text-gray-800 text-sm lg:text-lg font-bold w-full">
+        <span className="text-body text-sm lg:text-lg font-bold w-full">
           {`${new Date().getFullYear()} Theme: "The Holy Spirit, Power Behind God's Kingdom"`}
         </span>
       </div>
@@ -46,11 +46,11 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       )}
       {hasBackButton && (
         <button
-          className="bg-yellow-400 hover:bg-yellow-500 px-4 py-2 rounded-lg! flex items-center gap-2 font-medium text-sm"
+          className="bg-gold hover:bg-gold-hover px-4 py-2 rounded-xl flex items-center gap-2 font-medium text-sm text-body transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2"
           onClick={() => router.back()}
         >
           <ChevronLeft className="w-4 h-4" />
-          Back to home
+          Go back
         </button>
       )}
     </div>
