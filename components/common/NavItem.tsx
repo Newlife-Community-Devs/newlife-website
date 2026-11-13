@@ -5,29 +5,33 @@ const NavItem = ({
   children,
   text = "item",
   href,
-  activeUrl,
+  isActive,
   isOpen,
 }: Readonly<{
   children?: React.ReactNode;
   text: string;
   href: string;
-  activeUrl?: string;
+  isActive?: boolean;
   isOpen?: boolean;
 }>) => {
   return (
-    <div
-      className={`flex items-center ${
-        activeUrl === href ? "bg-gold" : ""
-      } rounded-xl `}
+    <Link
+      href={href}
+      aria-current={isActive ? "page" : undefined}
+      title={isOpen ? undefined : text}
+      className={`flex items-center w-full gap-1 rounded-xl px-2 py-2.5 transition-colors ${
+        isActive
+          ? "bg-gold text-body"
+          : "text-ink hover:bg-navy/5 hover:text-navy"
+      }`}
     >
-      <Link
-        href={`/prayer-request/admin/${href}`}
-        className="text-black flex no-underline! gap-3"
-      >
+      <span className="flex-shrink-0 flex items-center justify-center w-8">
         {children}
-        {isOpen && <p className="text-sm font-medium mt-3">{text}</p>}
-      </Link>
-    </div>
+      </span>
+      {isOpen && (
+        <span className="text-sm font-medium whitespace-nowrap">{text}</span>
+      )}
+    </Link>
   );
 };
 
