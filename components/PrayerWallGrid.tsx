@@ -1,10 +1,12 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import PrayerCard from "./common/PrayerCard";
 import PageHeader from "./common/PageHeader";
 import { API_BASE_URL } from "@/constants";
 import { generateInitials, generateColor, formatTimestamp } from "@/utils";
+import { fadeInUp, staggerContainer } from "@/utils/animations";
 import { Prayer } from "@/models";
 
 interface PrayerGridProps {
@@ -35,6 +37,8 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
   const [error, setError] = useState<string | null>(null);
   const [totalPages, setTotalPages] = useState(1);
   const [total, setTotal] = useState(0);
+  const gridTopRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const limit = 20;
 
@@ -97,23 +101,32 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
     fetchPrayers();
   }, [fetchPrayers]);
 
+  // Bring the grid back into view when paginating
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    gridTopRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [currentPage]);
+
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       {/* Header */}
       {hasHeader && (
         <PageHeader hasBackButton imageUrl="/images/nav-logo.png" />
       )}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <div ref={gridTopRef} className="max-w-7xl mx-auto px-4 py-8 scroll-mt-24">
         {/* Title */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-2">
-            <span className="text-yellow-400">Prayer</span>{" "}
-            <span className="text-gray-400">Wall</span>
+          <h1 className="font-heading text-[clamp(2rem,5vw,3.5rem)] font-bold mb-3">
+            <span className="text-gold-hover">Prayer</span>{" "}
+            <span className="text-ink">Wall</span>
           </h1>
-          <p className="text-gray-700 font-medium mb-0">
+          <p className="text-body font-medium mb-1">
             Together in prayer, we stand stronger.
           </p>
-          <p className="text-gray-600">
+          <p className="text-muted">
             {`Add your request, encourage others, and let's lift our voices in one
             accord`}
           </p>
@@ -121,9 +134,9 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
 
         {/* Loading State */}
         {loading && (
-          <div className="text-center py-12">
-            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-400"></div>
-            <p className="mt-4 text-gray-600">Loading prayers...</p>
+          <div className="text-center py-12" role="status" aria-live="polite">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-gold"></div>
+            <p className="mt-4 text-muted">Loading prayers...</p>
           </div>
         )}
 
@@ -133,7 +146,7 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
             <p className="text-red-600 mb-4">{error}</p>
             <button
               onClick={fetchPrayers}
-              className="px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-black rounded-lg font-medium transition-colors"
+              className="px-6 py-2 bg-gold hover:bg-gold-hover text-body rounded-xl font-semibold transition-colors"
             >
               Try Again
             </button>
@@ -145,27 +158,42 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
           <>
             {prayers.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-gray-600">
+                <p className="text-muted">
                   No prayers yet. Be the first to share!
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
-                {prayers.map((prayer) => (
-                  <PrayerCard key={prayer.id} prayer={prayer} />
-                ))}
-              </div>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentPage}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, transition: { duration: 0.15 } }}
+                  variants={staggerContainer}
+                  className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8"
+                >
+                  {prayers.map((prayer) => (
+                    <motion.div key={prayer.id} variants={fadeInUp}>
+                      <PrayerCard prayer={prayer} />
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
             )}
           </>
         )}
 
         {/* Pagination */}
         {!loading && !error && totalPages > 1 && (
-          <div className="flex justify-center items-center gap-2">
+          <nav
+            className="flex justify-center items-center gap-2"
+            aria-label="Prayer wall pages"
+          >
             <button
               onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
               disabled={currentPage === 1}
-              className="w-10 h-10 flex items-center justify-center bg-yellow-400 hover:bg-yellow-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Previous page"
+              className="w-10 h-10 flex items-center justify-center bg-gold hover:bg-gold-hover text-body rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
@@ -187,10 +215,12 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
                 <button
                   key={pageNum}
                   onClick={() => setCurrentPage(pageNum)}
-                  className={`w-10 h-10 flex items-center justify-center rounded-lg ${
+                  aria-label={`Page ${pageNum}`}
+                  aria-current={currentPage === pageNum ? "page" : undefined}
+                  className={`w-10 h-10 flex items-center justify-center rounded-lg transition-colors ${
                     currentPage === pageNum
-                      ? "bg-yellow-400"
-                      : "bg-gray-200 hover:bg-gray-300"
+                      ? "bg-gold text-body font-semibold"
+                      : "bg-gray-200 text-body hover:bg-gray-300"
                   }`}
                 >
                   {pageNum}
@@ -199,15 +229,19 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
             })}
 
             {totalPages > 5 && currentPage < totalPages - 2 && (
-              <div className="w-10 h-10 flex items-center justify-center">
-                ...
-              </div>
+              <span
+                className="w-10 h-10 flex items-center justify-center text-muted"
+                aria-hidden="true"
+              >
+                …
+              </span>
             )}
 
             {totalPages > 5 && currentPage < totalPages - 2 && (
               <button
                 onClick={() => setCurrentPage(totalPages)}
-                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 hover:bg-gray-300"
+                aria-label={`Page ${totalPages}`}
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-gray-200 text-body hover:bg-gray-300 transition-colors"
               >
                 {totalPages}
               </button>
@@ -218,16 +252,17 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
                 setCurrentPage(Math.min(totalPages, currentPage + 1))
               }
               disabled={currentPage === totalPages}
-              className="w-10 h-10 flex items-center justify-center bg-yellow-400 hover:bg-yellow-500 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+              aria-label="Next page"
+              className="w-10 h-10 flex items-center justify-center bg-gold hover:bg-gold-hover text-body rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
-          </div>
+          </nav>
         )}
 
         {/* Results count */}
         {!loading && !error && (
-          <div className="text-center mt-4 text-sm text-gray-600">
+          <div className="text-center mt-4 text-sm text-muted" aria-live="polite">
             Showing {prayers.length} of {total} prayers
           </div>
         )}
