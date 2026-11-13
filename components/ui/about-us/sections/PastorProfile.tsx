@@ -19,9 +19,9 @@ const PastorProfile = () => {
         >
           {/* Pastor Photo */}
           <motion.div variants={fadeInLeft} className="order-2 lg:order-1">
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl max-w-md mx-auto lg:max-w-none">
+            <div className="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-xl max-w-md mx-auto lg:max-w-none">
               <Image
-                src="/images/pastor-message.jpg"
+                src="/images/rev-opk.jpg"
                 alt="Rev. Michael A. Opoku - Senior Pastor"
                 fill
                 className="object-cover"

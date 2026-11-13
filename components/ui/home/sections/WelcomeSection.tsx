@@ -23,12 +23,12 @@ const WelcomeSection = () => {
             variants={fadeInLeft}
             className="w-full lg:w-[38%]"
           >
-            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
+            <div className="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/pastor-message.jpg"
+                src="/images/rev-opk.jpg"
                 alt="Reverend Michael Opoku - Pastor of Newlife Community Baptist Church"
                 fill
-                className="object-contain"
+                className="object-cover"
                 priority
               />
             </div>

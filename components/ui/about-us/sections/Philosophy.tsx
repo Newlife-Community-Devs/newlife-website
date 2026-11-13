@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import { Target, Users, ChevronRight } from "lucide-react";
-import { fadeInUp, staggerContainer, cardHover } from "@/utils/animations";
+import { fadeInUp, staggerContainer } from "@/utils/animations";
 
 const cards = [
   {
@@ -64,43 +64,38 @@ const Philosophy = () => {
             <motion.div
               key={card.tag}
               variants={fadeInUp}
+              whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgb(0 0 0 / 0.1)" }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
               className="bg-white border border-gray-200 rounded-2xl p-6 sm:p-8 shadow-sm"
             >
-              <motion.div
-                initial="rest"
-                whileHover="hover"
-                variants={cardHover}
-                className="rounded-2xl h-full"
-              >
-                <div className="flex flex-col items-center text-center space-y-5 sm:space-y-6 h-full">
-                  {/* Icon */}
-                  <div
-                    className={`w-20 h-20 sm:w-24 sm:h-24 ${card.iconClasses} rounded-full flex items-center justify-center`}
-                  >
-                    <card.icon className="w-10 h-10 sm:w-12 sm:h-12" strokeWidth={1.5} />
-                  </div>
-
-                  {/* Tag */}
-                  <div
-                    className={`${card.tagClasses} px-4 py-1.5 rounded-full text-sm font-semibold`}
-                  >
-                    {card.tag}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-base sm:text-lg text-muted leading-relaxed">
-                    {card.description}
-                  </p>
-
-                  {/* Learn More Button */}
-                  <button
-                    className={`flex items-center gap-1.5 text-muted ${card.hoverText} transition-colors mt-auto font-medium`}
-                  >
-                    Learn More
-                    <ChevronRight className="w-4 h-4" />
-                  </button>
+              <div className="flex flex-col items-center text-center space-y-5 sm:space-y-6 h-full">
+                {/* Icon */}
+                <div
+                  className={`w-20 h-20 sm:w-24 sm:h-24 ${card.iconClasses} rounded-full flex items-center justify-center`}
+                >
+                  <card.icon className="w-10 h-10 sm:w-12 sm:h-12" strokeWidth={1.5} />
                 </div>
-              </motion.div>
+
+                {/* Tag */}
+                <div
+                  className={`${card.tagClasses} px-4 py-1.5 rounded-full text-sm font-semibold`}
+                >
+                  {card.tag}
+                </div>
+
+                {/* Description */}
+                <p className="text-base sm:text-lg text-muted leading-relaxed">
+                  {card.description}
+                </p>
+
+                {/* Learn More Button */}
+                <button
+                  className={`flex items-center gap-1.5 text-muted ${card.hoverText} transition-colors mt-auto font-medium`}
+                >
+                  Learn More
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
             </motion.div>
           ))}
         </motion.div>
