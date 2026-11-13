@@ -7,6 +7,7 @@ import {
   fadeInRight,
   staggerContainer,
 } from "@/utils/animations";
+import { PASTOR_IMAGE } from "@/constants";
 
 const WelcomeSection = () => {
   return (
@@ -25,11 +26,13 @@ const WelcomeSection = () => {
           >
             <div className="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/rev-opk.jpg"
+                src={PASTOR_IMAGE.src}
                 alt="Reverend Michael Opoku - Pastor of Newlife Community Baptist Church"
                 fill
+                placeholder="blur"
+                blurDataURL={PASTOR_IMAGE.blurDataURL}
                 className="object-cover"
-                priority
+                sizes="(min-width: 1024px) 38vw, 100vw"
               />
             </div>
           </motion.div>

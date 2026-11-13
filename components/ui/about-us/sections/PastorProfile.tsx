@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "motion/react";
 import { Crown } from "lucide-react";
 import { fadeInLeft, fadeInRight, staggerContainer } from "@/utils/animations";
+import { PASTOR_IMAGE } from "@/constants";
 import Stats from "./Stats";
 
 const PastorProfile = () => {
@@ -21,12 +22,13 @@ const PastorProfile = () => {
           <motion.div variants={fadeInLeft} className="order-2 lg:order-1">
             <div className="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-xl max-w-md mx-auto lg:max-w-none">
               <Image
-                src="/images/rev-opk.jpg"
+                src={PASTOR_IMAGE.src}
                 alt="Rev. Michael A. Opoku - Senior Pastor"
                 fill
+                placeholder="blur"
+                blurDataURL={PASTOR_IMAGE.blurDataURL}
                 className="object-cover"
                 sizes="(min-width: 1024px) 40vw, 100vw"
-                priority
               />
             </div>
           </motion.div>

@@ -9,6 +9,15 @@ export enum API_BASE_URL {
   PRAYER = "https://newlife-prayer-wall-backend-1gq0w2ror.vercel.app/",
 }
 
+// Pastor portrait used below the fold on the home and about pages.
+// The blur placeholder lets the image fade in without a blank box.
+export const PASTOR_IMAGE = {
+  src: "/images/rev-opk.jpg",
+  blurDataURL:
+    "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAASABIAAD/2wBDABMTExMTEyATEyAtICAgLT0tLS0tPU09PT09PU1dTU1NTU1NXV1dXV1dXV1wcHBwcHCDg4ODg5OTk5OTk5OTk5P/2wBDARcYGCUjJUAjI0CZaFVomZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZn/wAARCAAQAAsDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAAAwIF/8QAIhAAAgEEAQQDAAAAAAAAAAAAAQIDAAQRIQUSIjFRYXHh/8QAFAEBAAAAAAAAAAAAAAAAAAAAAv/EABcRAQEBAQAAAAAAAAAAAAAAAAEAAhH/2gAMAwEAAhEDEQA/AGjtbaeVGhjUxglW8evikHFWbdyZwScaFXxkUCw4hZjhtk6P0aynNsrspncYJ10/tLqTA0o3/9k=",
+} as const;
+
+
 export const events: EventData[] = [
   {
     id: 1,
