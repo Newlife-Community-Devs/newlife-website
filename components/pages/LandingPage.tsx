@@ -1,13 +1,12 @@
 "use client";
 import { motion } from "motion/react";
 import { useModal } from "@/hooks/useModal";
-import { useRouter } from "next/navigation";
 import PageHeader from "../common/PageHeader";
+import CustomButton from "../common/CustomButton";
 import { RequestForm } from "../ui/RequestForm";
 
 const LandingPage = () => {
   const { isOpen, openModal, closeModal } = useModal();
-  const router = useRouter();
   return (
     <div className="min-h-screen relative p-3 sm:p-4 md:p-6 flex flex-col">
       <motion.div
@@ -41,10 +40,10 @@ const LandingPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight px-2">
+          <h1 className="font-heading text-white text-[clamp(1.75rem,6vw,4.5rem)] font-bold leading-tight px-2">
             Welcome to the
             <br />
-            NLCBC Prayer Wall
+            <span className="text-gold">NLCBC Prayer Wall</span>
           </h1>
 
           <p className="text-white text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed px-2">
@@ -59,22 +58,22 @@ const LandingPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <motion.button
-            className="w-full sm:w-auto bg-black text-white px-6 py-3 rounded-lg! font-medium text-sm sm:text-base shadow-lg hover:bg-gray-800 transition-colors"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => router.push("/prayer-request/wall")}
+          <CustomButton
+            variant="secondary"
+            size="lg"
+            href="/prayer-request/wall"
+            className="w-full sm:w-auto"
           >
             View Prayer Wall
-          </motion.button>
-          <motion.button
+          </CustomButton>
+          <CustomButton
+            variant="primary"
+            size="lg"
             onClick={openModal}
-            className="w-full sm:w-auto bg-yellow-400 text-black px-6 py-3 rounded-lg! font-medium text-sm sm:text-base shadow-lg hover:bg-yellow-300 transition-colors flex items-center justify-center gap-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="w-full sm:w-auto"
           >
-            <span>Send A Request</span>
-          </motion.button>
+            Send A Request
+          </CustomButton>
         </motion.div>
       </motion.div>
       {isOpen && <RequestForm onClose={closeModal} />}
