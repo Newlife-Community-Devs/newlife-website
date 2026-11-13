@@ -30,6 +30,8 @@ export interface Prayer {
     title: string;
     content: string;
   };
+  isAnswered?: boolean;
+  isFlagged?: boolean;
 }
 
 export interface PrayerRequest {

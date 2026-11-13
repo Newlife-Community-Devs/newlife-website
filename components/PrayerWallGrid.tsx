@@ -76,6 +76,8 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
             title: item.title || "Prayer",
             content: item.content,
           },
+          isAnswered: item.is_answered,
+          isFlagged: item.is_flagged,
         };
       });
 
