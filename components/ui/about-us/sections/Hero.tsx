@@ -40,10 +40,8 @@ const AboutHero = () => {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15, ease: [0.25, 0.1, 0.25, 1] }}
-          className="font-heading text-[clamp(2rem,6vw,4.5rem)] font-bold text-white mb-5 md:mb-6 leading-[1.1] tracking-tight"
+          className="font-heading text-[clamp(2rem,6vw,4.5rem)] font-bold mb-5 md:mb-6 leading-[1.1] tracking-tight"
         >
-          About
-          <br />
           <span className="text-gold">Newlife Community Baptist Church</span>
         </motion.h1>
 
