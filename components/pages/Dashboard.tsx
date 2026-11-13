@@ -1,3 +1,4 @@
+import { Inbox, Lock, CheckCircle2 } from "lucide-react";
 import StatsCard from "../common/StatsCard";
 import PrayerRequestTable from "../ui/PrayerRequestTable";
 
@@ -6,57 +7,57 @@ const Dashboard = () => {
     {
       title: "Total Requests",
       count: 242,
-      bgColor: "bg-yellow-200",
-      borderColor: "border-yellow-300",
-      textColor: "text-yellow-600",
-      countColor: "text-gray-900",
+      icon: <Inbox className="w-5 h-5" />,
+      iconBg: "bg-gold/15",
+      iconColor: "text-gold-hover",
     },
     {
       title: "Open Requests",
       count: 73,
-      bgColor: "bg-red-200",
-      borderColor: "border-red-300",
-      textColor: "text-red-600",
-      countColor: "text-gray-900",
+      icon: <Inbox className="w-5 h-5" />,
+      iconBg: "bg-red-100",
+      iconColor: "text-red-600",
     },
     {
       title: "Anonymous Requests",
       count: 170,
-      bgColor: "bg-purple-200",
-      borderColor: "border-purple-300",
-      textColor: "text-purple-600",
-      countColor: "text-gray-900",
+      icon: <Lock className="w-5 h-5" />,
+      iconBg: "bg-navy/10",
+      iconColor: "text-navy",
     },
     {
       title: "Approved Requests",
       count: 151,
-      bgColor: "bg-green-200",
-      borderColor: "border-green-300",
-      textColor: "text-green-600",
-      countColor: "text-gray-900",
+      icon: <CheckCircle2 className="w-5 h-5" />,
+      iconBg: "bg-green-100",
+      iconColor: "text-green-600",
     },
   ];
   const timestamp = "at 7:42hrs on 12/10/2025";
   return (
-    <div className="w-full px-10 pt-4 md:px-20 md:pt-10 ">
-      <div className="pb-10">
-        <h4>Hello Rev. Ocansey!</h4>
+    <div className="w-full px-4 sm:px-6 lg:px-10 pt-6 pb-10">
+      <div className="pb-8">
+        <h1 className="font-heading text-2xl sm:text-3xl font-bold text-ink">
+          Hello Rev. Ocansey!
+        </h1>
+        <p className="text-sm text-muted mt-1">
+          Here&apos;s an overview of your prayer wall activity.
+        </p>
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat) => (
           <StatsCard
             title={stat.title}
             count={stat.count}
             key={stat.title}
-            bgColor={stat.bgColor}
-            borderColor={stat.borderColor}
-            textColor={stat.textColor}
-            countColor={stat.countColor}
+            icon={stat.icon}
+            iconBg={stat.iconBg}
+            iconColor={stat.iconColor}
             timeStamp={timestamp}
           />
         ))}
       </div>
-      <div className="py-4">
+      <div className="py-6">
         <PrayerRequestTable />
       </div>
     </div>
