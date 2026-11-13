@@ -145,12 +145,14 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
   const endRecord = Math.min((currentPage + 1) * pageSize, totalRecords);
 
   return (
-    <div className="w-full bg-white rounded-lg shadow-sm">
+    <div className="w-full bg-white rounded-xl shadow-sm border border-gray-200">
       {/* Header Section */}
-      <div className="flex items-center justify-between p-4 border-b border-gray-200">
-        <h4 className="text-2xl font-bold text-gray-900">Prayer Requests</h4>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 border-b border-gray-200">
+        <h4 className="font-heading text-xl font-bold text-ink">
+          Prayer Requests
+        </h4>
         <div className="flex items-center gap-3">
-          <div className="relative">
+          <div className="relative flex-1 sm:flex-none">
             <Search
               className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
               size={18}
@@ -158,9 +160,10 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
             <input
               type="text"
               placeholder="Search"
+              aria-label="Search prayer requests"
               value={globalFilter ?? ""}
               onChange={(e) => setGlobalFilter(e.target.value)}
-              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent w-64"
+              className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent w-full sm:w-64"
             />
           </div>
           <button
@@ -181,7 +184,7 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="px-6 py-4 text-left text-sm font-medium text-gray-500 bg-gray-50"
+                    className="px-4 sm:px-6 py-3.5 text-left text-xs font-semibold text-muted uppercase tracking-wider bg-gray-50 whitespace-nowrap"
                   >
                     {header.isPlaceholder
                       ? null
@@ -195,34 +198,57 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
             ))}
           </thead>
           <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr
-                key={row.id}
-                className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-6 py-4">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
+            {table.getRowModel().rows.length === 0 ? (
+              <tr>
+                <td
+                  colSpan={columns.length}
+                  className="px-6 py-12 text-center text-muted"
+                >
+                  <p className="mb-2">No prayer requests found.</p>
+                  {globalFilter && (
+                    <button
+                      onClick={() => setGlobalFilter("")}
+                      className="text-sm font-medium text-navy hover:text-gold-hover transition-colors"
+                    >
+                      Clear search
+                    </button>
+                  )}
+                </td>
               </tr>
-            ))}
+            ) : (
+              table.getRowModel().rows.map((row) => (
+                <tr
+                  key={row.id}
+                  className="border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      key={cell.id}
+                      className="px-4 sm:px-6 py-4 whitespace-nowrap"
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </td>
+                  ))}
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between p-4 border-t border-gray-200">
-        <div className="text-sm text-gray-600">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 p-4 border-t border-gray-200">
+        <div className="text-sm text-muted" aria-live="polite">
           Showing {startRecord} to {endRecord} records of {totalRecords}
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
+            aria-label="Previous page"
             className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
               table.getCanPreviousPage()
-                ? "bg-yellow-400 hover:bg-yellow-500 text-gray-900"
+                ? "bg-gold hover:bg-gold-hover text-body"
                 : "bg-gray-200 text-gray-400 cursor-not-allowed"
             }`}
           >
@@ -277,10 +303,12 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
                 <button
                   key={page}
                   onClick={() => table.setPageIndex(page)}
+                  aria-label={`Page ${page + 1}`}
+                  aria-current={currentPageIndex === page ? "page" : undefined}
                   className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
                     currentPageIndex === page
-                      ? "bg-yellow-400 text-gray-900"
-                      : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+                      ? "bg-gold text-body"
+                      : "bg-gray-200 hover:bg-gray-300 text-body"
                   }`}
                 >
                   {page + 1}
@@ -292,9 +320,10 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
           <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
+            aria-label="Next page"
             className={`px-3 py-1.5 rounded-lg font-medium transition-colors ${
               table.getCanNextPage()
-                ? "bg-yellow-400 hover:bg-yellow-500 text-gray-900"
+                ? "bg-gold hover:bg-gold-hover text-body"
                 : "bg-gray-200 text-gray-400 cursor-not-allowed"
             }`}
           >
