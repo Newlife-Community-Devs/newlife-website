@@ -11,7 +11,6 @@ import {
 } from "@tanstack/react-table";
 import { Eye, Check, X, Search, Filter } from "lucide-react";
 import { PrayerRequest } from "@/models";
-import { mockPrayerRequests } from "@/constants";
 
 interface PrayerRequestTableProps {
   data?: PrayerRequest[];
@@ -29,7 +28,7 @@ const PrayerRequestTable: React.FC<PrayerRequestTableProps> = ({
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
 
-  const tableData = data.length > 0 ? data : mockPrayerRequests;
+  const tableData = data;
 
   const columns = useMemo<ColumnDef<PrayerRequest>[]>(
     () => [

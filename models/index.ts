@@ -14,8 +14,11 @@ export interface EventData {
 
 export interface UserSession {
   email: string;
+  name?: string;
+  roles: string[];
   token: string;
-  token_type: string;
+  refreshToken: string;
+  tokenExpiresAt: string;
   expires: string;
 }
 export interface Prayer {

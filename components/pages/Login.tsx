@@ -22,7 +22,9 @@ const initialValues: LoginValues = {
 };
 
 const validateSchema = Yup.object({
-  username: Yup.string().required("Username is required"),
+  username: Yup.string()
+    .required("Email is required")
+    .email("Enter a valid email"),
   password: Yup.string().required("Password required"),
 });
 
@@ -114,13 +116,13 @@ const Login = () => {
                     htmlFor="username"
                     className="block text-ink font-medium mb-1.5 text-sm"
                   >
-                    Username
+                    Email
                   </label>
                   <Field
                     id="username"
                     name="username"
                     type="text"
-                    placeholder="Enter your username"
+                    placeholder="Enter your email"
                     className="w-full border border-gray-300 rounded-lg px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent disabled:opacity-60"
                     disabled={isSubmitting}
                     autoComplete="username"

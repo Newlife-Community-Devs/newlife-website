@@ -6,7 +6,7 @@ export default async function layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const session = await getUserSession()
-  if (session) {
+  if (session?.email) {
     redirect("/prayer-request/admin/dashboard", RedirectType.replace)
   }
   return <>{children}</>

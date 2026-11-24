@@ -15,19 +15,20 @@ interface PrayerGridProps {
 
 interface ApiPrayerResponse {
   items: Array<{
-    id: number;
+    id: string;
     title: string | null;
     content: string;
-    created_at: string;
-    is_answered: boolean;
-    is_flagged: boolean;
-    owner_id: string | null;
-    submitter_name: string | null;
-    phone_number: string | null;
-    is_anonymous: boolean;
+    createdAt: string;
+    answeredAt: string | null;
+    isAnswered: boolean;
+    isAnonymous: boolean;
+    submitterName: string | null;
   }>;
-  total: number;
-  has_more: boolean;
+  page: number;
+  pageSize: number;
+  totalCount: number;
+  totalPages: number;
+  hasMore: boolean;
 }
 
 const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
@@ -47,12 +48,12 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
       setLoading(true);
       setError(null);
 
-      const skip = (currentPage - 1) * limit;
-      const url = `${API_BASE_URL.PRAYER}prayers/wall?skip=${skip}&limit=${limit}&sort_by=created_at&sort_order=desc`;
+      const url = `${API_BASE_URL}/api/v1/prayers/wall?page=${currentPage}&pageSize=${limit}&sort=createdAt&order=desc`;
       const response = await fetch(url, {
         method: "GET",
         headers: {
           accept: "application/json",
+          "Cache-Control": "no-store",
         },
       });
 
@@ -63,31 +64,30 @@ const PrayerWallGrid: React.FC<PrayerGridProps> = ({ hasHeader = true }) => {
       const data: ApiPrayerResponse = await response.json();
 
       const transformedPrayers: Prayer[] = data.items.map((item) => {
-        const isAnonymous = item.is_anonymous || !item.submitter_name;
-        const userName = isAnonymous ? "Anonymous User" : item.submitter_name!;
+        const isAnonymous = item.isAnonymous || !item.submitterName;
+        const userName = isAnonymous ? "Anonymous User" : item.submitterName!;
         const initials = generateInitials(userName);
         const color = generateColor(userName);
 
         return {
-          id: item.id.toString(),
+          id: item.id,
           user: {
             name: userName,
             initials,
             color,
           },
-          timestamp: formatTimestamp(item.created_at),
+          timestamp: formatTimestamp(item.createdAt),
           prayer: {
             title: item.title || "Prayer",
             content: item.content,
           },
-          isAnswered: item.is_answered,
-          isFlagged: item.is_flagged,
+          isAnswered: item.isAnswered,
         };
       });
 
       setPrayers(transformedPrayers);
-      setTotal(data.total);
-      setTotalPages(Math.ceil(data.total / limit));
+      setTotal(data.totalCount);
+      setTotalPages(Math.max(1, data.totalPages));
     } catch (err) {
       console.error("Error fetching prayers:", err);
       setError(err instanceof Error ? err.message : "Failed to load prayers");

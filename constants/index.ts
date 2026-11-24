@@ -5,9 +5,11 @@ export enum PAGE_URL {
   ADMIN_LOGIN = "/prayer-request/admin/",
   HOME = "/"
 }
-export enum API_BASE_URL {
-  PRAYER = "https://newlife-prayer-wall-backend-1gq0w2ror.vercel.app/",
-}
+// Base URL of newlife-community-apis. Local dev runs the API on :8080;
+// production points at the Render deployment.
+export const API_BASE_URL = (
+  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"
+).replace(/\/+$/, "");
 
 // Pastor portrait used below the fold on the home and about pages.
 // The blur placeholder lets the image fade in without a blank box.

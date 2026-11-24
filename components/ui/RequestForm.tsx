@@ -23,12 +23,17 @@ interface FormValues {
 }
 
 const validationSchema = Yup.object({
-  name: Yup.string().required("Name is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
+  name: Yup.string().required("Name is required").max(120),
+  phoneNumber: Yup.string()
+    .matches(/^233[0-9]{9}$/, "Enter a Ghana number like 233244000000")
+    .notRequired(),
 });
 
 const prayerRequestValidationSchema = Yup.object({
-  prayerRequest: Yup.string().required("Prayer request is required"),
+  prayerRequest: Yup.string()
+    .required("Prayer request is required")
+    .min(5, "Say a little more (at least 5 characters)")
+    .max(4000),
 });
 
 const TOTAL_STEPS = 3;
@@ -113,21 +118,29 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
   const handleSubmit = async (values: FormValues) => {
     setIsLoading(true);
     try {
-      const url = `${API_BASE_URL.PRAYER}prayers/submit`;
+      const url = `${API_BASE_URL}/api/v1/prayers`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          title: null,
+          content: values.prayerRequest,
+          submitterName: values.keepAnonymous ? null : values.name,
+          phoneNumber: values.phoneNumber || null,
+          isAnonymous: values.keepAnonymous,
+        }),
       });
 
       if (!response.ok) {
         let errorMsg = `Failed to submit prayer request. Status: ${response.status}`;
         try {
           const errorData = await response.json();
-          if (errorData.message) {
+          if (errorData.detail) {
+            errorMsg = errorData.detail;
+          } else if (errorData.message) {
             errorMsg = errorData.message;
           } else if (errorData.error) {
             errorMsg = errorData.error;
@@ -462,14 +475,14 @@ export const RequestForm = ({ onClose }: RequestFormProps) => {
                               htmlFor="phoneNumber"
                               className="block text-ink font-medium mb-2"
                             >
-                              Enter Phone Number:
+                              Enter Phone Number (optional):
                             </label>
                             <Field
                               type="tel"
                               id="phoneNumber"
                               name="phoneNumber"
                               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gold focus:border-transparent"
-                              placeholder="Your phone number"
+                              placeholder="e.g. 233244000000"
                             />
                             <ErrorMessage
                               name="phoneNumber"
