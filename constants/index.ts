@@ -5,10 +5,10 @@ export enum PAGE_URL {
   ADMIN_LOGIN = "/prayer-request/admin/",
   HOME = "/"
 }
-// Base URL of newlife-community-apis. Local dev runs the API on :8080;
-// production points at the Render deployment.
+// Base URL of newlife-community-apis. Defaults to the Render deployment;
+// local dev overrides it to http://localhost:8080 via .env.local.
 export const API_BASE_URL = (
-  process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080"
+  process.env.NEXT_PUBLIC_API_URL ?? "https://newlife-community-apis.onrender.com"
 ).replace(/\/+$/, "");
 
 // Pastor portrait used below the fold on the home and about pages.
